@@ -46,32 +46,49 @@ const employees = [
 
 function showEmployeeBonuses(employee) {
   console.log( 'in showEmployeeBonuses' );
-  const employeeInfo = {};
+  let employeeInfo = [];
   for (let i = 0; i < employee.length; i++){
-    if (employee[i].name) {
-    employeeInfo.push(employee[i].name, employeeInfo[i].bonusPercentage, 
-      employeeInfo[i].totalBonus, employeeInfo[i].totalCompensation);
+    if (employees[i].name) {
+    employeeInfo.push({
+      name: employees[i].name, 
+      bonusPercentage: calculateEmployeeBonus(employees[i]), 
+      totalBonus: employees[i].annualSalary * bonusPercentage, 
+      totalCompensation: totalBonus + employees[i].annualSalary});
     }    
   }
+  console.log('Employee Info:', employeeInfo);
   return employeeInfo;
 }
+
+
 
 function calculateEmployeeBonus(employees){
   console.log( 'in calculateRemainingBudget' );
   let bonusPercentage = 0;
-    if (employees.reviewRating === 1) 
+    if (employees.reviewRating === 1) { // if rating 2 add 0%
     bonusPercentage = 0;
-    else if(employees.reviewRating === 2)
+    } else if(employees.reviewRating === 2) { // if rating 2 add 0%
     bonusPercentage = 0;
-    else if(employees.reviewRating === 3)
+    } else if(employees.reviewRating === 3) { // if rating 3 add 4%
     bonusPercentage = 0.04;
-    else if(employees.reviewRating === 4)
+    } else if(employees.reviewRating === 4) { // if rating 4 add 6%
     bonusPercentage = 0.06;
-    else if(employees.reviewRating === 5)
+    } else if(employees.reviewRating === 5) // if rating 5 add 10%
     bonusPercentage = 0.1;
+    if (employees.employeeNumber.length === 4) { // if employee number is 4 digits add 5%
+      bonusPercentage += 0.05;
+    }
+    if (employees.annualIncome > 65000) { // if above 65000 lower 1%
+      bonusPercentage -= 0.01;
+    }
+    if (bonusPercentage > 0.13) { // if above 13% make 13%
+      bonusPercentage = 0.13;
+    } else if (bonusPercentage < 0) { // if below 0% make 0%
+      bonusPercentage = 0;
+    }  
   console.log('Total Bonus:', bonusPercentage);
   return bonusPercentage
 }
 
-console.log(calculateEmployeeBonus(employees[0]));
+console.log(calculateEmployeeBonus(employees[2]));
 console.log( employees )
