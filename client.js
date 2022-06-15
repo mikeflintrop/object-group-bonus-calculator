@@ -1,3 +1,13 @@
+$ (document).ready( readyNow );
+
+// display  button that, when clicked, displays bonuses
+function readyNow(){
+  let el = $('#bonusesOut');
+  el.empty();
+  el.append(bonusesOut);
+  $( '#displayBonusesButton' ).on( 'click', employees.name); //handle click event
+} // end readyNow
+
 const employees = [
   {
     name: 'Atticus',
