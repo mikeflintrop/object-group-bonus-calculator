@@ -44,22 +44,27 @@ const employees = [
 // let totalBonus = employees[i].annualSalary * bonusPercentage
 // let totalCompensation = totalBonus + employees[i].annualSalary
 
+// let employeeInfoObject = {
+//   name: employee.name,
+//   bonusPercentage: bonusPercentage,
+//   totalCompensation: totalCompensation,
+//   totalBonus: totalBonus,
+// }
+
 function showEmployeeBonuses(employee) {
   console.log( 'in showEmployeeBonuses' );
-  let employeeInfo = [];
-  for (let i = 0; i < employee.length; i++){
-    if (employees[i].name) {
-    employeeInfo.push({
-      name: employees[i].name, 
-      bonusPercentage: calculateEmployeeBonus(employees[i]), 
-      totalBonus: employees[i].annualSalary * bonusPercentage, 
-      totalCompensation: totalBonus + employees[i].annualSalary});
-    }    
-  }
-  console.log('Employee Info:', employeeInfo);
-  return employeeInfo;
-}
+  // should we move equations out of object?
+  let employeeInfoObject =  {
+      name: employee.name, 
+      bonusPercentage: calculateEmployeeBonus(employee), 
+      totalBonus: Math.round(employee.annualSalary * bonusPercentage),
+      totalCompensation: totalBonus + Number(employee.annualSalary)
+    }
+  console.log('Employee Info:', employeeInfoObject);
+  return employeeInfoObject;  
+}    
 
+console.log(showEmployeeBonuses(employees[0]))
 
 
 function calculateEmployeeBonus(employees){
